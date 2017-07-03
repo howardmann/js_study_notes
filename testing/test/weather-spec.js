@@ -9,6 +9,47 @@ describe('#weather', function(){
     expect(weather).to.be.ok;
   });
 
+  it('should fetchWeather and transformWeather', function(done){
+    let coordinates = {
+      lat: '20',
+      lng: '30'
+    }
+
+    let fakeData = {
+      latitude: 20,
+      longitude: 30,
+      timezone: "Africa/Khartoum",
+      currently: {
+        time: 1499027144,
+        summary: "Clear",
+        icon: "clear-night"        
+      }
+    }
+
+    let actual = {
+      lat: 20,
+      lng: 30,
+      timezone: "Africa/Khartoum",
+      date: "2/7/2017"
+    }
+
+    let fakeFetch = {
+      getJSON: function(url){
+        return Promise.resolve(fakeData);
+      }
+    }
+
+    weather.fetchWeather(fakeFetch.getJSON, coordinates)
+    .then(data =>{
+      expect(data).to.eq(fakeData);
+      return weather.transformWeather(data)      
+    })
+    .then(output =>{
+      expect(output).to.eql(actual)
+    })
+    .then(done,done)
+  });
+
   describe('.transformWeather', function(){
     it('should exist', function(){
       expect(weather.transformWeather).to.be.ok;
@@ -135,5 +176,6 @@ describe('#weather', function(){
         .then(done, done)
     });
   });
+
 });
 

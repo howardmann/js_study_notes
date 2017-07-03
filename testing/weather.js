@@ -7,8 +7,10 @@ let axios = require('axios');
 
 // Module functions
 /**
- * transforms weather object to return desired properties
- */
+* Transforms raw object into custom weather object and relevant properties
+* @param  {Object} obj {data format from returned from API}
+* @return {Object} {weather object with relevant properties}
+*/
 weather.transformWeather = function(obj){
   return {
     coordinates: {
@@ -21,8 +23,11 @@ weather.transformWeather = function(obj){
 };
 
 /**
- * Fetches current weather based on coordinates. Also pass in the jQuery promise
- */
+* Fetches weather data from api using ajax library or jQuery as default
+* @param  {Promise} fetch       {ajax function for fetching ajax data}
+* @param  {Object} coordinates {lat: number, lng: number}
+* @return {Promise} {promise returning data}
+*/
 weather.fetchWeather = function(fetch, coordinates){
   // If fetch argument is not given and jQuery exists on the page as a global variable then use ajax as fetch
   if ((!fetch) && (typeof $ !== 'undefined')) {
@@ -36,8 +41,10 @@ weather.fetchWeather = function(fetch, coordinates){
 };
 
 /**
- * Same as above but using sinon to stub vs. passing in promise
- */ 
+* Fetches weather data from api using axios
+* @param  {Object} coordinates {lat: number, lng: number}
+* @return {Promise} {axios promise returning data}
+*/
 weather.fetchSinon = function(coordinates){
   let lat = coordinates.lat;
   let lng = coordinates.lng;
@@ -46,7 +53,13 @@ weather.fetchSinon = function(coordinates){
   return axios.get(url)
 }
 
+/**
+* Transforms weather object into HTML string
+* @param  {Object} obj {Weather data including coordinates, timezone and date}
+* @return {String} {HTML string output}
+*/
 weather.renderHTML = function(obj){
+  // Handle missing parameters to avoid throwing errors
   let coordinates = obj.coordinates || {};
   let lat = coordinates.lat || '';
   let lng = coordinates.lng || '';
@@ -57,4 +70,15 @@ weather.renderHTML = function(obj){
     <p>Timezone: ${obj.timezone}</p>
     <p>Date: ${obj.date}</p>
   `
+}
+
+/**
+* Appends string to id specified in DOM
+* @param  {Object} $ {jQuery selector, for testing purposes}
+* @param  {String} selector {CSS selector in DOM that string will be rendered to}
+* @param  {String} html {HTML weather string}
+
+*/
+weather.appendDOM = function($, selector, html){
+  return $(selector).append(html);  
 }

@@ -254,5 +254,38 @@ describe('#weather', function(){
       expect(weather.renderHTML(input)).html.to.equal(actual);
     })
   })
+
+  describe('appendDOM', function(){
+    it('should exist', function(){
+      expect(weather.appendDOM).to.be.ok;
+    });
+
+    it('should append html to DOM', function(){
+      let cheerio = require('cheerio');
+      let dom = `
+        <html>
+          <body>
+            <h1>Hello world</h1>
+            <div id=app></div>          
+          </body>
+        </html>
+      `
+
+      let html = `
+        <p>Coordinates:<p>
+        <p>Timezone: Africa/Khartoum</p>
+        <p>Date: 2/7/2017</p>      
+      `
+
+      // Use cheerio to simulate jQuery object loading html on page
+      let $ = cheerio.load(dom);
+      let selector = '#app';
+
+      // Call function and save to variable $div
+      weather.appendDOM($, selector, html);
+      expect($('#app').html()).html.to.equal(html);
+
+    });
+  });
 });
 

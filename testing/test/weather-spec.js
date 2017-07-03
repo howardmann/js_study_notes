@@ -1,4 +1,6 @@
 var chai = require('chai');
+var chaiHTML = require('chai-html');
+chai.use(chaiHTML);
 var expect = chai.expect;
 var sinon = require('sinon');
 
@@ -27,8 +29,10 @@ describe('#weather', function(){
     }
 
     let actual = {
-      lat: 20,
-      lng: 30,
+      coordinates: {
+        lat: 20,
+        lng: 30
+      },
       timezone: "Africa/Khartoum",
       date: "2/7/2017"
     }
@@ -66,8 +70,10 @@ describe('#weather', function(){
         }
       };
       let actual = {
-        lat: 20,
-        lng: 30,
+        coordinates: {
+          lat: 20,
+          lng: 30
+        },
         timezone: "Africa/Khartoum",
         date: "2/7/2017"
       };
@@ -177,5 +183,76 @@ describe('#weather', function(){
     });
   });
 
+  describe('.renderHTML', function(){
+    it('should exist', ()=>{
+      expect(weather.renderHTML).to.be.ok;
+    })
+
+    it('should return output in HTML format', ()=>{
+      let input = {
+        coordinates: {
+          lat: 20,
+          lng: 30
+        },
+        timezone: "Africa/Khartoum",
+        date: "2/7/2017"
+      }
+
+      let actual = `
+        <p>Coordinates: 20, 30<p>
+        <p>Timezone: Africa/Khartoum</p>
+        <p>Date: 2/7/2017</p>
+      `
+
+      expect(weather.renderHTML(input)).html.to.equal(actual);
+
+      input = {
+        coordinates: {
+          lat: 50,
+          lng: 18
+        },
+        timezone: "Europe/Warsaw",
+        date: "2/7/2017"        
+      }
+
+      actual = `
+        <p>Coordinates: 50, 18<p>
+        <p>Timezone: Europe/Warsaw</p>
+        <p>Date: 2/7/2017</p>
+      `
+
+      expect(weather.renderHTML(input)).html.to.equal(actual);
+    });
+
+    it('should handle objects with missing properties', ()=>{
+      let input = {
+        timezone: "Africa/Khartoum",
+        date: "2/7/2017"
+      }
+      
+      let actual = `
+        <p>Coordinates:<p>
+        <p>Timezone: Africa/Khartoum</p>
+        <p>Date: 2/7/2017</p>
+      `
+      expect(weather.renderHTML(input)).html.to.equal(actual);
+
+      input = {
+        coordinates: {
+          lng: 18
+        },
+        timezone: "Africa/Khartoum",
+        date: "2/7/2017"                
+      }
+
+      actual = `
+        <p>Coordinates: , 18<p>
+        <p>Timezone: Africa/Khartoum</p>
+        <p>Date: 2/7/2017</p>      
+      `
+
+      expect(weather.renderHTML(input)).html.to.equal(actual);
+    })
+  })
 });
 

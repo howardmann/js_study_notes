@@ -11,8 +11,10 @@ let axios = require('axios');
  */
 weather.transformWeather = function(obj){
   return {
-    lat: obj.latitude,
-    lng: obj.longitude,
+    coordinates: {
+      lat: obj.latitude,
+      lng: obj.longitude
+    },
     timezone: obj.timezone,
     date: util.dateTransform(obj.currently.time)
   }  
@@ -41,7 +43,18 @@ weather.fetchSinon = function(coordinates){
   let lng = coordinates.lng;
   // Note we add ?callback=? at end to set dataType as JSONP, this is a jQuery peculiarity
   var url = `https://api.darksky.net/forecast/438668b8945bed8564ce3ecc62112a27/${lat},${lng}?callback=?`
-  return axios.get(url).then(data => {
-    return data
-  }).catch(err => Promise.reject(err));
+  return axios.get(url)
+}
+
+weather.renderHTML = function(obj){
+  let coordinates = obj.coordinates || {};
+  let lat = coordinates.lat || '';
+  let lng = coordinates.lng || '';
+  let coordinatesHTML = (!!lat || !!lng) ? `${lat}, ${lng}` : '';
+
+  return `
+    <p>Coordinates: ${coordinatesHTML}<p>
+    <p>Timezone: ${obj.timezone}</p>
+    <p>Date: ${obj.date}</p>
+  `
 }

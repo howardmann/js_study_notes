@@ -12,6 +12,7 @@
   "devDependencies": {
     "axios": "^0.16.2",
     "chai": "^4.0.2",
+    "chai-html": "^1.1.4",
     "jquery": "^3.2.1",
     "sinon": "^2.3.6"
   }

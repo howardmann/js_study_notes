@@ -1,6 +1,6 @@
 import chai from 'chai';
 import {expect} from 'chai';
-import util from '../util.js';
+import util from '../app/util.js';
 
 describe('#util', function(){
 

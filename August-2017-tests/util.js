@@ -33,6 +33,11 @@ util.tallyArr = (arr) => {
   }, initial);
 }
 
+/**
+ * @function {sorts an object by property value}
+ * @param  {Object} obj
+ * @return {Object} {sorted object from highest to lowest value}
+ */
 util.sortObj = (obj) => {
   // Note JS quirk, array typeof is an object, so we also need to check that if is Array then we throw
   if ((typeof obj) !== 'object' || (Array.isArray(obj))) { throw new Error('Must pass object as argument')} // Handle non-object params

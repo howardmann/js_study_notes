@@ -1,5 +1,10 @@
 let util = module.exports = {};
 
+/**
+ * @function {sums an array of numbers}
+ * @param  {Array} arr
+ * @return {Number}
+ */
 util.sumArr = (arr) => {  
   if (!Array.isArray(arr)) { throw new Error('Must pass array as argument')} // Handle non-array params
   
@@ -12,4 +17,13 @@ util.sumArr = (arr) => {
   }, initial);
 
   return sumTotal;
+}
+
+util.tallyArr = (arr) => {
+  if (!Array.isArray(arr)) { throw new Error('Must pass array as argument')} // Handle non-array params
+  let initial = {};
+  return arr.reduce((tally, el) => {
+    !tally[el] ? tally[el] = 1 : tally[el] += 1;  // Create object with element as property and initial value 1, increment property value if it exists
+    return tally;
+  }, initial);
 }

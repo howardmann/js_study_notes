@@ -61,4 +61,54 @@ describe('#util', function(){
     })
   });
 
+  describe('.tallyArr', function(){
+    let tallyArr = util.tallyArr;
+    it('should exist', () => expect(tallyArr).to.not.be.undefined);
+    it('should tally an array of strings', () => {
+      let input = ['apple', 'apple', 'orange', 'pear', 'orange', 'pineapple', 'peach'];
+      let actual = {
+        apple: 2,
+        orange: 2,
+        pear: 1,
+        pineapple: 1,
+        peach: 1
+      }
+      expect(tallyArr(input)).to.eql(actual);
+      
+      input = ['howie', 'burger', 'howie'];
+      actual = {
+        howie: 2,
+        burger: 1
+      }
+      expect(tallyArr(input)).to.eql(actual);
+
+      input = ['howie', 'burger', 'howie', undefined, false];
+      actual = {
+        howie: 2,
+        burger: 1,
+        undefined: 1,
+        false: 1
+      }
+      expect(tallyArr(input)).to.eql(actual);
+    });
+    it('should tally numbers', () => {
+      let input = [42,42,7,2,7,42];
+      let actual = {
+        '42': 3,
+        '7': 2,
+        '2':1
+      };
+      expect(tallyArr(input)).to.eql(actual);
+    });
+
+    it('should only accept Array as argument', () => {
+      let input = ['banana', undefined, 42, true, 0, {name: 'joe'}];
+      let actual = 'Must pass array as argument';
+
+      input.forEach(el => {
+        expect(() => tallyArr(el)).to.throw(actual);
+      })
+    })
+  });
+
 });

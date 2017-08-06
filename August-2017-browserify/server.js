@@ -16,6 +16,10 @@ app.get('/', function(req, res, next){
   res.render('home');
 });
 
+app.get('/tally', function(req, res, next){
+  res.render('tally');
+});
+
 app.listen(3000, function(){
   console.log('Listening to port 3000');
 });

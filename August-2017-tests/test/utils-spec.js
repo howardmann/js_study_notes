@@ -142,4 +142,19 @@ describe('#util', function(){
     })
     
   })
+
+  describe('.tallyArr and .sortObj', function(){
+    let tallyArr = util.tallyArr;
+    let sortObj = util.sortObj;
+
+    it('should tally an array and then sort from greatest to smallest', () => {
+      let input = ['banana','banana', 'apple','pear', 'pear', 'pear', 'pear'];
+      let actual = {
+        pear: 4,
+        banana: 2,
+        apple: 1
+      }
+      expect(sortObj(tallyArr(input))).to.eql(actual);
+    })
+  })
 });

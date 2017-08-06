@@ -111,4 +111,35 @@ describe('#util', function(){
     })
   });
 
+  describe('.sortObj', function(){
+    let sortObj = util.sortObj;
+    it('should exist', () => expect(sortObj).to.not.be.undefined);
+
+    it('should sort an object from highest to lowest number', () => {
+      let input = {
+        apple: 2,
+        orange: 10,
+        banana: 1,
+        peach: 7
+      };
+
+      let actual = {
+        orange: 10,
+        peach: 7,
+        apple: 2,
+        banana: 1
+      };
+      expect(sortObj(input)).to.eql(actual);
+    });
+
+    it('should only accept object as argument', () => {
+      let input = [42, undefined, [1,2,3]];
+      let actual = 'Must pass object as argument';
+
+      input.forEach(el => {
+        expect(() => sortObj(el)).to.throw(actual);
+      })
+    })
+    
+  })
 });

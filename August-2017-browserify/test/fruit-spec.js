@@ -19,11 +19,12 @@ describe('#fruit', function(){
       };
       expect(fruits).to.satisfy(arrayOfObjects);
     });
-    // it('should return elements with keys "name" and "color"', () => {
-    //   let fruits = fruit.index();
-      
-
-    // })
+    it('should return elements with keys "name" and "color"', () => {
+      let fruits = fruit.index();
+      fruits.forEach(el => {
+        expect(el).to.have.keys('name', 'color');
+      });
+    })
   })
 
 });

@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dev": "PORT=1234 BANANA=fruit nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1.1",
+    "chai-http": "^3.0.0",
     "mocha": "^3.5.0"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
     "lodash": "^4.17.4"
   }
 }

@@ -4,11 +4,7 @@ const util = require('util');
 
 // Custom class function which will inherit from node event emitter
 let FruitBowl = function(){
-  // Define a callback to be used in success message
-  var callback;
-  // Bind this to Node.js EventEmitter, provide access to .on and .emit
-  EventEmitter.call(this);
-
+  // Contrived example of method picking random friut string. Not part of eventEmitter theory
   this.randomFruit = function () {
     const fruitsArr = ['apple', 'banana', 'pineapple', 'pear', 'orange', 'tomato'];
     let randomFruit = fruitsArr[Math.floor(Math.random() * fruitsArr.length)];
@@ -21,8 +17,6 @@ let FruitBowl = function(){
 
   // 1. Start by emitting first event and passing in a randomFruit
   this.init = function (cb) {
-    // Set init callback
-    callback = cb;
     this.emit('pickFruit', this.randomFruit());
   }  
 
@@ -39,9 +33,6 @@ let FruitBowl = function(){
   // 5. End of process will log out a success message and callback
   this.sellFruit = function (randomFruit) {
     console.log(`Sold Fruit: ${randomFruit}`);
-    callback(null, {
-      message: 'success'
-    })
   }
 
   // 4. When juiceFruit is complete, then its time to call sellFruit
@@ -53,7 +44,7 @@ let FruitBowl = function(){
 util.inherits(FruitBowl, EventEmitter);
 
 // To initialize code, create a new instance of FruitBowl and then call init
-var fruit1 = new FruitBowl();
+// var fruit1 = new FruitBowl();
 // fruit1.init(function(err, result){
 //   console.log(result);
 // });

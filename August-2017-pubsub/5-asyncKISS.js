@@ -1,5 +1,9 @@
-// KISS - Don't use event emitter if you don't need to
-// Object Literal when dealing with async code. Use setTimeout to simulate async
+// [5] Async */ KISS - Same example as 4 but using Promises and setTimout to simulate async code and database fetches
+// We simulate randomFruit being a database fetch which takes 1 second to return a random fruit
+// We wrap this in a Promise and resolve after 1 second with the random fruit
+// The init function itself also returns a Promise which first fetches the random fruit .then calls the other methods before finally resolving with a success message
+// NOTE: this is still KISS and much cleaner than using event emitters
+// For testing, this introduces stubs which we can use to simulate the randomFruit fetching and resolving a Promise with a piece of fruit
 
 var FruitBowlAsync = {
   randomFruit: function () {

@@ -1,3 +1,7 @@
+// [2.] Example of how to extend Node.js eventEmitter using inheritence and function constructor methods
+// We use the util helper to have our FruitBowl constructor function inherit from node's event emitter
+// We use the .emit and .on listeners to trigger which functin should happen next
+
 // require events and util which will be used to extend to an emitter
 const EventEmitter = require('events').EventEmitter;
 const util = require('util');

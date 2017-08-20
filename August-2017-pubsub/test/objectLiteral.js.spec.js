@@ -1,10 +1,13 @@
+// Using object literal notation we cannot bind the eventEmitter to the object
+// We test the logic separtely of the object literal and the custom event emitter it registers and listen to events
+
 let chai = require('chai');
 let expect = chai.expect;
 let sinon = require('sinon');
 
 // Require modules
-let FruitBowlLiteral = require('../objectLiteral.js').FruitBowlLiteral;
-let fruitEvents = require('../objectLiteral.js').fruitEvents;
+let FruitBowlLiteral = require('../3-objectLiteralEventEmitter.js').FruitBowlLiteral;
+let fruitEvents = require('../3-objectLiteralEventEmitter.js').fruitEvents;
 
 describe('FruitBowlLiteral', function () {
   // Spy on object literal methods

@@ -1,9 +1,12 @@
+// Because we arent using node eventEmitters we are able to spy on all functions being calld
+// KISS is great isn't it
+
 let chai = require('chai');
 let expect = chai.expect;
 let sinon = require('sinon');
 
 // Require modules
-let FruitBowlSync = require('../synchronous.js');
+let FruitBowlSync = require('../4-synchronousKISS.js');
 
 describe('FruitBowlSync', function () {
   // Spy on methods being called

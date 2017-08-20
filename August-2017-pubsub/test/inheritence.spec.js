@@ -1,6 +1,10 @@
+// Testing for eventEmitter requires sinon and registering .on before the tests
+// Sinon cannot directly spy on functions that are called via sinon's event emitter 
+// We must use .on and pass in a spy to detect if they are being called
+
 let chai = require('chai');
 let expect = chai.expect;
-let FruitBowl = require('../inheritence.js');
+let FruitBowl = require('../2-inheritenceEventEmitter.js');
 let sinon = require('sinon');
 
 describe('FruitBowl', function () {

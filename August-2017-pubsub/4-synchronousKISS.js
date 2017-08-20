@@ -1,5 +1,7 @@
-// KISS - Don't use event emitter if you don't need to
-// Object Literal without using event Emitters
+// [4] Synchronous KISS - Keep It Simple Stupid: Don't use event emitter if you don't need to
+// Object Literal without using event Emitters, but simple synchronous code
+// Look how easy this is without using complicated eventEmitters
+// We pass through the sequential workflows in the init function - much simpler and easier to test with spies
 
 var FruitBowlSync = {
   randomFruit: function () {

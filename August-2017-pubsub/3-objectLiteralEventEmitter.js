@@ -1,4 +1,10 @@
-// Same example as PubSub but using an Object Literal pattern
+// [3.] Object Literal pattern
+// Same example as 2-inheritenceEventEmitter but using Object literal pattern
+// Note object literals cannot inhereit from the eventEmitter, therefore we have two variables 1 for the ltieral and 1 for a new instance of the eventEmitter
+// Unlike the construtor example in 2, the FruitBowlLiteral relies on a separate eventEmitter instance (fruitEvents) for its pubsub patterns
+// We must remember to register the .on events before calling .emit
+// In our example below we have an init function which first calls setupTasks to register the .on events and workflow and then calls the first .emit to trigger the process
+
 const EventEmitter = require('events').EventEmitter;
 // We create a new instance of eventEmitter that the object literal has access to. We cannot use inheritance here
 const fruitEvents = new EventEmitter();

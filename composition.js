@@ -33,6 +33,7 @@ let murderRobotDog = function(name){
   )
 }
 
+// Creates new instances of the object
 var sniffles = murderRobotDog('sniffles');
 console.log(sniffles);
 // { bark: [Function: bark],
@@ -41,6 +42,11 @@ console.log(sniffles);
 
 sniffles.bark()
 // Woof my name is sniffles
+
+var rex = murderRobotDog('rex');
+rex.bark();
+// Woof my name is rex
+
 
 
 

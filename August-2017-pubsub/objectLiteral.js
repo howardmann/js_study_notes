@@ -3,7 +3,7 @@ const EventEmitter = require('events').EventEmitter;
 // We create a new instance of eventEmitter that the object literal has access to. We cannot use inheritance here
 const fruitEvents = new EventEmitter();
 
-// Custom class function which will inherit from node event emitter
+// Objet Literal
 var FruitBowlLiteral = {
   randomFruit: function() {
     const fruitsArr = ['apple', 'banana', 'pineapple', 'pear', 'orange', 'tomato'];

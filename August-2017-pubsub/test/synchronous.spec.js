@@ -27,5 +27,15 @@ describe('FruitBowlSync', function () {
   it('should call sellFruit', function () {
     expect(sellFruitSpy.called).to.be.true;
   });
+
+  describe('.randomFruit', function(){
+    let randomFruit = FruitBowlSync.randomFruit;
+    it('should exist', () => expect(randomFruit).to.not.be.undefined);
+    it('should return a random fruit from the fruits arr',function(){
+      const fruitsArr = ['apple', 'banana', 'pineapple', 'pear', 'orange', 'tomato'];
+      let fruit = randomFruit();
+      expect(fruitsArr).to.include(fruit);
+    })
+  })
 })
 

@@ -1,11 +1,12 @@
 var chai = require('chai');
 var expect = chai.expect;
+let app = require('../server.js');
 var chaiHttp = require('chai-http');
+var nock = require('nock');
+
 chai.use(chaiHttp);
 
-let app = require('../server.js');
-
-describe.only('App', () => {
+describe('App', () => {
   it('should exist', () => expect(app).to.not.be.undefined);
   it('should successfully validate valid properties on POST /validation', function(done){
     chai.request(app)
@@ -59,5 +60,43 @@ describe.only('App', () => {
         done();
       })
   });
+  
 
 });
+
+describe.only('App using nock', () => {
+  // Use nock to intercept http request
+  var goodCall = nock('http://localhost:3000')
+    .get('/bananaboat')
+    .reply(200, {
+      message: 'omg my favourite boat'
+    });
+
+    var badCall = nock('http://localhost:3000')
+    .get('/xyz')
+    .reply(404, {
+      message: 'page not found'
+    });
+  
+  it('should intercept good calls', function(done){
+    chai.request('http://localhost:3000')
+      .get('/bananaboat')
+      .end(function(err, res){
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(res.body.message).to.equal('omg my favourite boat')
+        done();
+      })
+  })
+
+  it('should intercept bad calls', function(done){
+    chai.request('http://localhost:3000')
+      .get('/xyz')
+      .end(function(err, res){
+        expect(res).to.have.status(404);
+        expect(res).to.be.json;
+        expect(res.body.message).to.equal('page not found')
+        done();
+      })
+  })
+})

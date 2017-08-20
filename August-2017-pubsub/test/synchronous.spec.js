@@ -5,7 +5,7 @@ let sinon = require('sinon');
 // Require modules
 let FruitBowlSync = require('../synchronous.js');
 
-describe.only('FruitBowlSync', function () {
+describe('FruitBowlSync', function () {
   // Spy on methods being called
   let randomFruitSpy = sinon.spy(FruitBowlSync, 'randomFruit');
   let prepareFruitSpy = sinon.spy(FruitBowlSync, 'prepareFruit');

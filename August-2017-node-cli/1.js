@@ -1,3 +1,8 @@
+#!/usr/bin/env node
+// If we use the shebang script above we can run this similar to a bash script
+// In terminal run chmod 700 1.js
+// Then we can run the file as an executable ./1.js --help
+
 // Module to parse args with args given as --key==value
 let args = require('yargs-parser')(process.argv.slice(2));
 

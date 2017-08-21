@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // If we use the shebang script above we can run this similar to a bash script
 // In terminal run chmod 700 1.js
+// `chmod 700 file.ext` enables user to read write and execute file
+// chmod is short for change mode and is a unix style command to change access permissions
 // Then we can run the file as an executable ./1.js --help
 
 // Module to parse args with args given as --key==value

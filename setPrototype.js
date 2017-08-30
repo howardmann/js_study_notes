@@ -34,3 +34,8 @@ felix.blabber();  //  Gender: undefined, Dad's name: undefined
 // Set prototype to howie which inherits from man
 Object.setPrototypeOf(felix, howie);
 felix.blabber();  //  Gender: male, Dad's name: How Dogz
+
+
+// Prototypes follow delegation and inheritence, so if the ancestor changes then all descendants will change
+howie.name = "Mann Attack"
+felix.blabber(); // Gender: male, Dad's name: Mann Attack

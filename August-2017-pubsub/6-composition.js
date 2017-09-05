@@ -87,10 +87,4 @@ let chineseRestaurant = PetComp('stir fry');
 chineseRestaurant.init();
 // console.log ->
 // Random item picked: goldfish
-<<<<<<< HEAD
 // Sold soft toy comprised of: goldfish
-=======
-// Sold soft toy comprised of: goldfish
-
-module.exports = composition;
->>>>>>> a32b8e74ac5f9c60bdf06fef7b2aa74007b105f8

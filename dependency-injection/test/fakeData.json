@@ -1,0 +1,9 @@
+{
+  "data": [
+    {"id": "1", "fruit": "banana", "color": "yellow"},
+    {"id": "2", "fruit": "apple", "color": "red"},
+    {"id": "3", "fruit": "pear", "color": "green"},
+    {"id": "4", "fruit": "orange", "color": "salmon"},
+    {"id": "5", "fruit": "chocolate", "color": "brown"}
+  ]
+}

@@ -34,7 +34,7 @@ describe('#weather', function(){
         lng: 30
       },
       timezone: "Africa/Khartoum",
-      date: "2/7/2017"
+      date: "3/7/2017"
     }
 
     let fakeFetch = {
@@ -75,7 +75,7 @@ describe('#weather', function(){
           lng: 30
         },
         timezone: "Africa/Khartoum",
-        date: "2/7/2017"
+        date: "3/7/2017"
       };
       expect(weather.transformWeather(input)).to.eql(actual);
     });

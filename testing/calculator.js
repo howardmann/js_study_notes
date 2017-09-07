@@ -5,8 +5,7 @@ let { legitNumber } = require('./helpers')
 
 // ES5 syntax
 calculator.makeAdder = function(adder){
-  if (!legitNumber(adder))
-    return false
+  if (!legitNumber(adder)) return false
 
   return function(num){
     return legitNumber(num) && (num + adder)

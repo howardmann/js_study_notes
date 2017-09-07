@@ -1,7 +1,7 @@
 let expect = require('chai').expect
 let calculator = require('../calculator')
 
-describe.only('#calculator', () => {
+describe('#calculator', () => {
   it('should exist', () => expect(calculator).to.not.be.undefined)
   describe('.makeAdder', () => {
     it('should exist', () => expect(calculator.makeAdder).to.not.be.undefined)

@@ -6,7 +6,7 @@ let {
   legitObject
 } = require('../helpers')
 
-describe.only('#helpers', () => {
+describe('#helpers', () => {
   describe('.legitString', () => {
     it('should exist', () => expect(legitString).to.not.be.undefined)
     it('should return true when passed a valid string', () => {

@@ -1,5 +1,9 @@
 let expect = require('chai').expect
-let { getNestedFruit } = require('../helpers')
+let { 
+  getNestedFruit,
+  checkPayload,
+  checkPayloadPredicate
+} = require('../helpers')
 
 let payload = {
   data: {
@@ -21,6 +25,34 @@ let badPayload = {
   }
 }
 
+let validPayload = {
+  data: {
+    user: {
+      id: 42,
+      name: 'Howie Mann',
+      role: 'Admin'
+    },
+    meta: {
+      country: 'Neverland',
+      browser: 'Opera'
+    }
+  }
+}
+let errorPayload = {
+  data: {
+    user: {
+      id: 42,
+      name: 'Howie Mann',
+      role: 'Admin'
+    },
+    punkd: {
+      country: 'Neverland',
+      browser: 'Opera'
+    }
+  }
+}
+
+
 describe('#getNestedFruit', () => {
  it('should exist', () => expect(getNestedFruit).to.not.be.undefined)
  it('should return the nested fruit if it exists', () => {
@@ -38,4 +70,29 @@ describe('#getNestedFruit', () => {
    let actual = false
    expect(input).to.eql(actual)      
  })
+})
+
+describe.only('#checkPayload', () => {
+  it('should exist', () => expect(checkPayload).to.not.be.undefined)
+  it('should return true if valid payload', () => {
+    let input = checkPayload(validPayload)
+    expect(input).to.be.true
+  })
+  it('should return array of error messages if invalid payload', () => {
+    let input = checkPayload(errorPayload)
+    let actual = ['country missing', 'browser missing']
+    expect(input).to.eql(actual)
+  })
+})
+
+describe.only('#checkPayloadPredicate', () => {
+  it('should exist', () => expect(checkPayloadPredicate).to.not.be.undefined)
+  it('should return true if valid payload', () => {
+    let input = checkPayloadPredicate(validPayload)
+    expect(input).to.be.true
+  })
+  it('should return false if invalid payload', () => {
+    let input = checkPayloadPredicate(errorPayload)
+    expect(input).to.be.false
+  })
 })

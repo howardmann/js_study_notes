@@ -72,7 +72,7 @@ describe('#getNestedFruit', () => {
  })
 })
 
-describe.only('#checkPayload', () => {
+describe('#checkPayload', () => {
   it('should exist', () => expect(checkPayload).to.not.be.undefined)
   it('should return true if valid payload', () => {
     let input = checkPayload(validPayload)
@@ -85,7 +85,7 @@ describe.only('#checkPayload', () => {
   })
 })
 
-describe.only('#checkPayloadPredicate', () => {
+describe('#checkPayloadPredicate', () => {
   it('should exist', () => expect(checkPayloadPredicate).to.not.be.undefined)
   it('should return true if valid payload', () => {
     let input = checkPayloadPredicate(validPayload)

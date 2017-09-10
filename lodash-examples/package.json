@@ -7,14 +7,18 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha ./test/**spec.js"
+    "test": "mocha ./test/**spec.js",
+    "cover": "nyc mocha ./test/**spec.js",
+    "cover-html": "nyc --reporter=html mocha ./test/**spec.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^3.5.0"
+    "istanbul": "^0.4.5",
+    "mocha": "^3.5.0",
+    "nyc": "^11.2.1"
   },
   "dependencies": {
     "lodash": "^4.17.4"

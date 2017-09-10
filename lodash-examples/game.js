@@ -40,10 +40,10 @@ var Game = {
           this.winArray = [];
         }
         if (count === this.countWin) {
-          console.log("checkRow true on row: " + row);
+          // console.log("checkRow true on row: " + row);
           this["finish"] = true;
-          console.log("Start", row);
-          console.log("End", col);
+          // console.log("Start", row);
+          // console.log("End", col);
           return true;
         }
       }
@@ -62,7 +62,7 @@ var Game = {
           this.winArray = [];
         }
         if (count === this.countWin) {
-          console.log("checkCol true on col " + col);
+          // console.log("checkCol true on col " + col);
           this["finish"] = true;
           return true;
         }
@@ -85,7 +85,7 @@ var Game = {
           this.winArray = [];
         }
         if (count === this.countWin) {
-          console.log("Win diagonal TL to BR");
+          // console.log("Win diagonal TL to BR");
           this["finish"] = true;
           return true;
         }
@@ -104,7 +104,7 @@ var Game = {
           this.winArray = [];
         }
         if (count === this.countWin) {
-          console.log("Win diagonal TL to BR");
+          // console.log("Win diagonal TL to BR");
           this["finish"] = true;
           return true;
         }
@@ -119,7 +119,7 @@ var Game = {
     for (var rowStart = 0; rowStart < maxLength; rowStart++) {
       var count = 0;
       this.winArray = [];
-      for (var row = rowStart, col = (length - 1); row < length && col >= 0; row++ , col--) {
+      for (var row = rowStart, col = (length - 1); row < length && col >= 0; (row++  && col--)) {
         if (this.board[row][col] === playerChosen) {
           count++;
           this.winArray.push(Array(row, col));
@@ -128,7 +128,7 @@ var Game = {
           this.winArray = [];
         }
         if (count === this.countWin) {
-          console.log("Win diagonal TR to BL");
+          // console.log("Win diagonal TR to BL");
           this["finish"] = true;
           return true;
         }
@@ -138,8 +138,7 @@ var Game = {
     for (var colStart = (length - 2); colStart > (this.countWin - 2); colStart--) {
       var count = 0;
       this.winArray = [];
-      for (var col = colStart, row = 0; col >= 0 && row <= (length - 2);
-        (col-- && row++)) {
+      for (var col = colStart, row = 0; col >= 0 && row <= (length - 2);(col-- && row++)) {
         if (this.board[row][col] === playerChosen) {
           count++;
           this.winArray.push(Array(row, col));
@@ -148,7 +147,7 @@ var Game = {
           this.winArray = [];
         }
         if (count === this.countWin) {
-          console.log("Win diagonal TR to BL");
+          // console.log("Win diagonal TR to BL");
           this["finish"] = true;
           return true;
         }

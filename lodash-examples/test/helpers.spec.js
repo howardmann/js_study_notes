@@ -63,12 +63,12 @@ describe('#getNestedFruit', () => {
  it('should return false if nested fruit does not exist', () => {
    let input = getNestedFruit(payload, 'chocolate')
    let actual = false
-   expect(input).to.eql(actual)   
+   expect(input).to.eql(actual)
  })
  it('should return false with different payload', () => {
    let input = getNestedFruit(badPayload, 'banana')
    let actual = false
-   expect(input).to.eql(actual)      
+   expect(input).to.eql(actual)
  })
 })
 

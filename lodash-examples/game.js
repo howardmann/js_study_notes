@@ -161,6 +161,13 @@ var Game = {
     })
     return result.every(el => el)
   },
+  noSpace: function(){
+    var board = this.board
+    var result = board.map(arr => {
+      return arr.filter(el => el == '.').length === 0
+    })
+    return result.every(el => el)
+  },
   checkAll: function (playerChosen) {
     if (this.checkRows(playerChosen)) {
       return true;
@@ -174,10 +181,11 @@ var Game = {
     if (this.checkDiagRL(playerChosen)) {
       return true;
     }
-    if (!this.finish && this.isEmpty()) {
+    if (!this.finish && this.noSpace()) {
       console.log("Draw game no winner");
       return true;
     }
+    return false
   }
 };
 

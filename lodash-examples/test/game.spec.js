@@ -486,6 +486,114 @@ describe("#Game", () => {
       expect(input).to.equal(actual)
     })
   })
+  describe('.checkAll', () => {
+    it('should exist', () => expect(Game.checkAll).to.not.be.undefined)
+    describe('row win', () => {
+      let playerOne
+      let playerTwo
+      beforeEach('setup row win', () => {
+        // Win 3 in a row
+        Game.winCount(3)
+        playerOne = 'howie'
+        playerTwo = 'felix'
+        // playerOne wins top row
+        Game.addMark(playerOne, 0, 0)
+        Game.addMark(playerTwo, 1, 0)
+        Game.addMark(playerOne, 0, 1)
+        Game.addMark(playerTwo, 1, 1)
+        Game.addMark(playerOne, 0, 2)
+      })
+      it('should return true for playerOne win', () => {
+        let input = Game.checkAll(playerOne)
+        expect(input).to.be.true
+      })
+      it('should return false for playerTwo win', () => {
+        let input = Game.checkAll(playerTwo)
+        expect(input).to.be.false
+      })
+    })
+    describe('column win', () => {
+      let playerOne
+      let playerTwo
+      beforeEach('setup win', () => {
+        // Win 3 in a column
+        Game.winCount(3)
+        playerOne = 'howie'
+        playerTwo = 'felix'
+        // playerOne wins top row
+        Game.addMark(playerOne, 0, 0)
+        Game.addMark(playerTwo, 2, 2)
+        Game.addMark(playerOne, 1, 0)
+        Game.addMark(playerTwo, 1, 1)
+        Game.addMark(playerOne, 2, 0)
+      })
+      it('should return true for playerOne win', () => {
+        let input = Game.checkAll(playerOne)
+        expect(input).to.be.true
+      })
+      it('should return false for playerTwo win', () => {
+        let input = Game.checkAll(playerTwo)
+        expect(input).to.be.false
+      })
+    })
+    describe('diagLR win', () => {
+      let playerOne
+      let playerTwo
+      beforeEach('setup win', () => {
+        // Win 3 diag
+        Game.winCount(3)
+        playerOne = 'howie'
+        playerTwo = 'felix'
+        // playerOne wins top row
+        Game.addMark(playerOne, 0, 0)
+        Game.addMark(playerTwo, 1, 0)
+        Game.addMark(playerOne, 1, 1)
+        Game.addMark(playerTwo, 2, 1)
+        Game.addMark(playerOne, 2, 2)
+      })
+      it('should return true for playerOne win', () => {
+        let input = Game.checkAll(playerOne)
+        expect(input).to.be.true
+      })
+      it('should return false for playerTwo win', () => {
+        let input = Game.checkAll(playerTwo)
+        expect(input).to.be.false
+      })
+    })
+    describe('draw game win', () => {
+      let playerOne
+      let playerTwo
+      beforeEach('setup draw', () => {
+        // Draw
+        Game.winCount(3)
+        playerOne = 'howie'
+        playerTwo = 'felix'
+        Game.addMark(playerOne, 0, 0)
+        Game.addMark(playerTwo, 0, 2)
+        Game.addMark(playerOne, 0, 1)
+        Game.addMark(playerTwo, 1, 0)
+        Game.addMark(playerOne, 1, 2)
+        Game.addMark(playerTwo, 1, 1)
+        Game.addMark(playerOne, 2, 0)
+        Game.addMark(playerTwo, 2, 2)
+        Game.addMark(playerOne, 2, 1)
+      })
+      describe('.noSpace', () => {
+        it('should return true if no spaces left', () => {
+          let input = Game.noSpace()
+          expect(input).to.be.true
+        })
+      })
+      it('should return true for draw', () => {
+        let input = Game.checkAll(playerTwo)
+        expect(input).to.be.true
+      })
+      it('should return true for draw', () => {
+        let input = Game.checkAll(playerOne)
+        expect(input).to.be.true
+      })
+    })
+  })
 })
 
 

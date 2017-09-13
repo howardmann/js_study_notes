@@ -12,7 +12,7 @@ describe("#Game", () => {
   describe('.newBoard', () => {
     it('should exist', () => expect(Game.newBoard).to.not.be.undefined)
     it('creates a new Board of n x n filled with marker . and stores it to the Game.board property', () => {
-      let input = Game.board 
+      let input = Game.board
       let actual = [['.','.','.'],['.','.','.'],['.','.','.']]
       expect(input).to.eql(actual)
     })
@@ -79,13 +79,13 @@ describe("#Game", () => {
       Game.addMark(playerTwo, markedRow, markedCol)
       let input = Game.board[markedRow][markedCol]
       let actual = playerOne
-      expect(input).to.equal(actual)      
+      expect(input).to.equal(actual)
     })
-    
+
   })
   describe('.checkRows', () => {
     let playerOne = 'howie'
-    let playerTwo = 'felix'    
+    let playerTwo = 'felix'
     it('should exist', () => expect(Game.checkRows).to.not.be.undefined)
     describe('for winning playerOne row combination based on 3x3 board and 3 win combo', () => {
       beforeEach('set up winning row between 2 players', () => {
@@ -144,11 +144,11 @@ describe("#Game", () => {
         let actual = []
         expect(input).to.eql(actual)
       })
-    })    
+    })
   })
   describe('.checkCols', () => {
     let playerOne = 'howie'
-    let playerTwo = 'felix'    
+    let playerTwo = 'felix'
     it('should exist', () => expect(Game.checkCols).to.not.be.undefined)
     describe('for winning playerOne Col combination based on 3x3 board and 3 win combo', () => {
       beforeEach('set up non-winning combo between 2 players', () => {
@@ -208,7 +208,7 @@ describe("#Game", () => {
         expect(input).to.eql(actual)
       })
     })
-    
+
   })
   describe('.checkDiagLR', () => {
     beforeEach('setup 5x5 board with 3 win combo', () => {
@@ -220,7 +220,7 @@ describe("#Game", () => {
       Game.board = undefined
     })
     let playerOne = 'howie'
-    let playerTwo = 'felix'    
+    let playerTwo = 'felix'
     it('should exist', () => expect(Game.checkDiagLR).to.not.be.undefined)
     describe('for bottom half diagonal LR', () => {
       describe('for winning playerOne Diagonal LR combination based on 5x5 board and 3 win combo', () => {
@@ -338,7 +338,7 @@ describe("#Game", () => {
         })
       })
     })
-    
+
   })
   describe('.checkDiagRL', () => {
     beforeEach('setup 5x5 board with 3 win combo', () => {
@@ -350,7 +350,7 @@ describe("#Game", () => {
       Game.board = undefined
     })
     let playerOne = 'howie'
-    let playerTwo = 'felix'    
+    let playerTwo = 'felix'
     it('should exist', () => expect(Game.checkDiagRL).to.not.be.undefined)
     describe('for bottom half diagonal RL', () => {
       describe('for winning playerOne Diagonal RL combination based on 5x5 board and 3 win combo', () => {
@@ -464,7 +464,27 @@ describe("#Game", () => {
         it('should empty the winning coordinates')
       })
     })
-    
+
+  })
+  describe('.isEmpty', () => {
+    it('should exist', () => expect(Game.isEmpty).to.not.be.undefined)
+    it('should return true if board is empty', () => {
+      // Setup empty 3x3 board
+      Game.board = undefined
+      Game.newBoard(3)
+      let input = Game.isEmpty()
+      let actual = true
+      expect(input).to.equal(actual)
+    })
+    it('should return false if board is not empty', () => {
+      // Setup empty 3x3 board
+      Game.board = undefined
+      Game.newBoard(3)
+      Game.addMark('howie',1,1)
+      let input = Game.isEmpty()
+      let actual = false
+      expect(input).to.equal(actual)
+    })
   })
 })
 

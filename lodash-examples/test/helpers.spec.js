@@ -1,5 +1,5 @@
 let expect = require('chai').expect
-let { 
+let {
   getNestedFruit,
   checkPayload,
   checkPayloadPredicate

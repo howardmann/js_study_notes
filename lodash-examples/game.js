@@ -155,13 +155,11 @@ var Game = {
     }
   },
   isEmpty: function () {
-    var check = true;
-    for (var i = 0; i < this.board.length; i++) {
-      if (this.board[i].includes('.')) {
-        return false;
-      }
-    }
-    return check;
+    var board = this.board
+    var result = board.map(arr => {
+      return arr.filter(el => el !== '.').length === 0
+    })
+    return result.every(el => el)
   },
   checkAll: function (playerChosen) {
     if (this.checkRows(playerChosen)) {

@@ -12,7 +12,7 @@ composition.randomString = function(arrString){
     randomString: function(){
       let random = arrString[Math.floor(Math.random() * arrString.length)];
       console.log(`Random item picked: ${random}`);
-      return random;  
+      return random;
     }
   }
 }
@@ -24,7 +24,7 @@ composition.appendString = function(appendString){
       console.log(`Prepared: ${prepared}`);
       return prepared;
     }
-  }  
+  }
 }
 
 composition.sellItem = function(product){
@@ -87,10 +87,4 @@ let chineseRestaurant = PetComp('stir fry');
 chineseRestaurant.init();
 // console.log ->
 // Random item picked: goldfish
-<<<<<<< HEAD
 // Sold soft toy comprised of: goldfish
-=======
-// Sold soft toy comprised of: goldfish
-
-module.exports = composition;
->>>>>>> a32b8e74ac5f9c60bdf06fef7b2aa74007b105f8

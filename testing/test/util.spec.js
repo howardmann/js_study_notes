@@ -14,7 +14,7 @@ describe('#util', function(){
     
     it('should transform a unix string', function(){
       let input = 1499027144;
-      let actual = '2/7/2017'
+      let actual = '3/7/2017'
       expect(util.dateTransform(input)).to.equal(actual);
     });
 

@@ -1,7 +1,7 @@
 let expect = require('chai').expect
 let ajax = require('../ajax')
 
-describe.only('#ajax', () => {
+describe('#ajax', () => {
   describe('.makeFetch', () => {
     let fetch;
     beforeEach('setup fetch', () => {

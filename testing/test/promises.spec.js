@@ -1,7 +1,8 @@
 let expect = require('chai').expect
 let promises = require('../promises')
-var chai = require("chai");
-var chaiAsPromised = require("chai-as-promised");
+let chai = require("chai");
+let sinon = require('sinon');
+let chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 
 // Note
@@ -81,6 +82,45 @@ describe('#promises', () => {
         let input = readFileAsync('./cow.txt', 'utf8')
         let actual = 'nar mate'
         expect(input).to.be.rejectedWith(actual)
+      })
+    })
+    describe('testing with sinon', () => {
+      it('should work succesfully', (done) => {
+        let fs = require('fs')
+        let data = Promise.resolve('chook') 
+        let stub = sinon.stub(fs, 'readFileAsync').withArgs('./chicken.txt', 'utf8').returns(data);
+
+        promises.readFileAsync('./chicken.txt', 'utf8')
+          .then(data => {
+            expect(data).to.eql('chook')
+            done()
+          })
+      })
+      it('should work success with different stubbing', (done) => {
+        // Same as dependency injection examples above except we can control the arguments passed
+        let fs = {
+          readFileAsync: sinon.stub().withArgs('./cat.txt', 'utf8').returns(Promise.resolve('miaow'))
+        }        
+        
+        let readFileAsync = promises.makeReadFileAsync(fs)
+        readFileAsync('./cat.txt', 'utf8')
+          .then(data => {
+            expect(data).to.equal('miaow')
+            done()
+          })
+      })
+      it('should work error with different stubbing', (done) => {
+        // Same as dependency injection examples above except we can control the arguments passed
+        let fs = {
+          readFileAsync: sinon.stub().withArgs('./banned.txt', 'utf8').returns(Promise.reject('nar mate'))
+        }        
+        
+        let readFileAsync = promises.makeReadFileAsync(fs)
+        readFileAsync('./banned.txt', 'utf8')
+          .catch(data => {
+            expect(data).to.equal('nar mate')
+            done()
+          })
       })
     })
   })

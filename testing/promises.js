@@ -1,4 +1,4 @@
-let promises = module.exports = {}
+let promises = {}
 
 // dependencies
 let fs = require('fs')
@@ -26,4 +26,9 @@ promises.readFileAsync = function (file, ext) {
 // In our tests we will inject a fake fs object with a fake method that resolves/ rejects
 promises.makeReadFileAsync = (fs) => (file, ext) => {
   return fs.readFileAsync(file, ext)
+}
+
+module.exports = {
+  promises,
+  fs
 }

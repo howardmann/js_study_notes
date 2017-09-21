@@ -1,5 +1,5 @@
 let expect = require('chai').expect
-let promises = require('../promises')
+let promises = require('../promises').promises
 let chai = require("chai");
 let sinon = require('sinon');
 let chaiAsPromised = require("chai-as-promised");

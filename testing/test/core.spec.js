@@ -29,25 +29,46 @@ describe('#core', () => {
 })
 
 describe.only('#corePromise', () => {
-  it('should call services', () => {
-    let services = {
-      fs: {
-        readFileAsync: sinon.stub(),
-        writeFile: sinon.spy()        
-      },
-      axios: {
-        get: sinon.stub()
-      }
+  let services = {
+    fs: {
+      readFileAsync: sinon.stub(),
+      writeFile: sinon.spy()
+    },
+    axios: {
+      get: sinon.stub()
     }
-
+  }
+  
+  it('should call services when successful', (done) => {
     services.fs.readFileAsync.resolves('http://www.promise.com')
     services.axios.get.resolves({data:'html promise outputs'})
 
-    corePromise(services)
+    corePromise(services).then(data => {
+      expect(services.fs.readFileAsync.calledWith('./url.txt', 'utf8')).to.be.ok
+      expect(services.axios.get.called).to.be.ok
+      expect(services.fs.writeFile.calledWith('./output2.html', 'html promise outputs')).to.be.true      
+      expect(data).to.equal('html promise outputs')
+      done()
+    })
+  })  
+  it('should catch errors at fs.readFileAsync', (done) => {
+    services.fs.readFileAsync.returns(Promise.reject('nar mate'))
+    corePromise(services).catch(err => {
+      expect(err).to.equal('nar mate')
+      done()
+    })
+  })  
+  it('should catch errors at axios.get', (done) => {
+    services.fs.readFileAsync.resolves('http://www.promise.com')
+    services.axios.get.returns(Promise.reject('whoa buddy'))
 
-    expect(services.fs.readFileAsync.calledWith('./url.txt', 'utf8')).to.be.ok
-    // The assertions below cannot be detected. Bug not sure how to test/ stop assertions being made until code has run
-    // expect(services.axios.get.called).to.be.ok
-    // expect(services.fs.writeFile.calledWith('./output.tmp', 'html promise outputs')).to.be.true      
+    corePromise(services)
+    .then(data => {
+      expect(services.fs.readFileAsync.calledWith('./url.txt', 'utf8')).to.be.ok      
+    })
+    .catch(err => {
+      expect(err).to.equal('whoa buddy')
+      done()
+    })
   })  
 })

@@ -17,3 +17,5 @@ app.parseFruit = (obj) => {
     fruit: `${fruit} with color of ${color}`
   }
 }
+
+app.fetch = app.makeFetch(axios)

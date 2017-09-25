@@ -54,6 +54,11 @@ describe('#promises', () => {
         let actual = 'miaow'
         expect(input).to.eventually.equal(actual)
       })
+      it.only('should work using ES7 async await', async() => {
+        let input = await readFileAsync('./cow.txt', 'utf8')
+        let actual = 'miaow'
+        expect(input).to.equal(actual)
+      })
     })
     describe('testing promise reject', () => {
       let fs, readFileAsync

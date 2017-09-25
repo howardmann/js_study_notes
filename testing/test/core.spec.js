@@ -28,7 +28,7 @@ describe('#core', () => {
   })  
 })
 
-describe.only('#corePromise', () => {
+describe('#corePromise', () => {
   let services = {
     fs: {
       readFileAsync: sinon.stub(),

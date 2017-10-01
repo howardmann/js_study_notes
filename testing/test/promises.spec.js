@@ -55,6 +55,7 @@ describe('#promises', () => {
         expect(input).to.eventually.equal(actual)
       })
       it.only('should work using ES7 async await', async() => {
+        // Note async await only works with node > 8 [You will need to use nvm to use the latest version or test will throw error]
         let input = await readFileAsync('./cow.txt', 'utf8')
         let actual = 'miaow'
         expect(input).to.equal(actual)

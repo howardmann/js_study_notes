@@ -84,3 +84,7 @@ util.celsiusToFahrenheit = (celsius) => {
   }
   return celsius * 1.8 + 32
 }
+
+util.promiseFetch = (url, request=axios) => {
+  return request.get(url)
+}

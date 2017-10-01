@@ -5,7 +5,8 @@ let {
   capitalizeSentence,
   validator,
   isNumber,
-  celsiusToFahrenheit
+  celsiusToFahrenheit,
+  promiseFetch
 } = require('../util')
 
 describe.only('#util', () => {
@@ -85,6 +86,33 @@ describe.only('#util', () => {
       inputArr.forEach(num => {
         expect(() => celsiusToFahrenheit(num)).to.throw('not a valid number')
       })
+    })
+  })
+  describe('.promiseFetch', () => {
+    it('should fetch data and return a promise', (done) => {
+      let mockRequest = {
+        get() {
+          return Promise.resolve({data: 'banana'})
+        }
+      }
+      promiseFetch('http://howiemann.tech', mockRequest)
+        .then(payload => {
+          let input = payload.data
+          let actual = 'banana'
+          expect(input).to.equal(actual)
+          done()
+        })
+    })
+    it('should also work using async await', async () => {
+      // Note async await only works with node > 8 [You will need to use nvm to use the latest version or test will throw error]
+      let mockRequest = {
+        get() {
+          return Promise.resolve({ data: 'banana' })
+        }
+      }
+      let input = await promiseFetch('http://howiemann.tech', mockRequest)
+      let actual = {data: 'banana'}
+      expect(input).to.eql(actual)
     })
   })
 })

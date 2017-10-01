@@ -2,7 +2,8 @@ let expect = require('chai').expect
 let {
   isString,
   capitalize,
-  capitalizeSentence
+  capitalizeSentence,
+  validator
 } = require('../util')
 
 describe.only('#util', () => {
@@ -47,6 +48,15 @@ describe.only('#util', () => {
         expect(() => capitalizeSentence(str)).to.throw('must be a valid string')
       })
       
+    })
+  })
+  describe('.validator', () => {
+    it('should apply the original function and store the error message', () => {
+      let errMsg = 'invalid name'
+      let nameValidator = validator(errMsg, isString)
+      let input = nameValidator(42)
+      expect(input).to.not.be.ok
+      expect(nameValidator.errorMessage).to.equal(errMsg)
     })
   })
 })

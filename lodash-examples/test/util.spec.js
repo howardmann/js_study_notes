@@ -1,6 +1,8 @@
 let expect = require('chai').expect
 let {
-  isString
+  isString,
+  capitalize,
+  capitalizeSentence
 } = require('../util')
 
 describe.only('#util', () => {
@@ -17,6 +19,34 @@ describe.only('#util', () => {
         let input = isString(str)
         expect(input).to.not.be.ok
       })
+    })
+  })
+  describe('.capitalize', () => {
+    it('should capitalize a valid string', () => {
+      let input = capitalize('hello')
+      let actual = 'Hello'
+      expect(input).to.equal(actual)
+    })
+    it('should throw error if invalid string passed', () => {
+      let invalid = [null, undefined, 1, true]
+      invalid.forEach(str => {
+        expect(() => capitalize(str)).to.throw('must be a valid string')
+      })
+      
+    })
+  })
+  describe('.capitalizeSentence', () => {
+    it('should capitalize a valid string sentence', () => {
+      let input = capitalizeSentence('hello world')
+      let actual = 'Hello World'
+      expect(input).to.equal(actual)
+    })
+    it('should throw error if invalid string passed', () => {
+      let invalid = [null, undefined, 1, true]
+      invalid.forEach(str => {
+        expect(() => capitalizeSentence(str)).to.throw('must be a valid string')
+      })
+      
     })
   })
 })

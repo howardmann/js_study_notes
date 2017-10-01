@@ -3,7 +3,9 @@ let {
   isString,
   capitalize,
   capitalizeSentence,
-  validator
+  validator,
+  isNumber,
+  celsiusToFahrenheit
 } = require('../util')
 
 describe.only('#util', () => {
@@ -57,6 +59,32 @@ describe.only('#util', () => {
       let input = nameValidator(42)
       expect(input).to.not.be.ok
       expect(nameValidator.errorMessage).to.equal(errMsg)
+    })
+  })
+  describe('.isNumber', () => {
+    it('should check valid numbers', () => {
+      let input = isNumber(42)
+      expect(input).to.be.ok
+    })
+    it('should return false for invalid numbers', () => {
+      let inputArr = ['hello', null, undefined, true, [1,2,3], {}, NaN, Infinity]
+      inputArr.forEach(num => {
+        let input = isNumber(num)
+        expect(input).to.not.be.ok
+      })
+    })
+  })
+  describe('.celsiusToFahrenheit', () => {
+    it('should convert valid celsius inputs', () => {
+      let input = celsiusToFahrenheit(0)
+      let actual = 32
+      expect(input).to.equal(actual)
+    })
+    it('should throw error message for invalid inputs', () => {
+      let inputArr = ['hello', null, undefined, true, [1, 2, 3], {}, NaN, Infinity]
+      inputArr.forEach(num => {
+        expect(() => celsiusToFahrenheit(num)).to.throw('not a valid number')
+      })
     })
   })
 })

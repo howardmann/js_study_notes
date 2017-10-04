@@ -107,11 +107,11 @@ describe.only('#util', () => {
       // Note async await only works with node > 8 [You will need to use nvm to use the latest version or test will throw error]
       let mockRequest = {
         get() {
-          return Promise.resolve({ data: 'banana' })
+          return Promise.resolve({ data: 42 })
         }
       }
-      let input = await promiseFetch('http://howiemann.tech', mockRequest)
-      let actual = {data: 'banana'}
+      let input = await promiseFetch('http://localhost:3000/answer', mockRequest)
+      let actual = {data: 42}
       expect(input).to.eql(actual)
     })
   })

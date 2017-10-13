@@ -6,7 +6,9 @@ let {
   validator,
   isNumber,
   celsiusToFahrenheit,
-  promiseFetch
+  promiseFetch,
+  isObject,
+  getProperty
 } = require('../util')
 
 describe.only('#util', () => {
@@ -88,6 +90,19 @@ describe.only('#util', () => {
       })
     })
   })
+  describe('.isObject', () => {
+    it('should return true for a plain object', () => {
+      let obj = { fruit: 'apple', color: 'red' }
+      let input = isObject(obj)
+      expect(input).to.be.ok
+    })
+    it('should return false for non plain objects', () => {
+      [42,'hello', [], true].forEach(obj => {
+        let input = isObject(obj)
+        expect(input).to.not.be.ok        
+      })
+    })
+  })
   describe('.promiseFetch', () => {
     it('should fetch data and return a promise', (done) => {
       let mockRequest = {
@@ -114,5 +129,49 @@ describe.only('#util', () => {
       let actual = {data: 42}
       expect(input).to.eql(actual)
     })
+  })
+  describe('.getProperty', () => {
+    it('should return a property value if it exists', () => {
+      let obj = {
+        fruit: 'apple',
+        color: 'red'
+      }
+      let input = getProperty(obj, 'fruit')
+      let actual = 'apple'
+      expect(input).to.equal(actual)
+    })
+    it('should return nested properties if they exist', () => {
+      let obj = {
+        fruit: {
+          species: 'aurora',
+          color: 'red'
+        }
+      }
+      let input = getProperty(obj, 'fruit.species')
+      let actual = 'aurora'
+      expect(input).to.equal(actual)      
+    })
+    it('should return undefined if nested properties do not exist and not cannot read property ... of undefined', () => {
+      let obj = {
+        fruit: {
+          species: 'aurora',
+          color: 'red'
+        }
+      }
+      let input = getProperty(obj, 'notHere.species')
+      let actual = undefined
+      expect(input).to.equal(actual)
+    })    
+    it('should return default value if nested properties do not exist and not cannot read property ... of undefined', () => {
+      let obj = {
+        fruit: {
+          species: 'aurora',
+          color: 'red'
+        }
+      }
+      let input = getProperty(obj, 'notHere.species', 'nar mate')
+      let actual = 'nar mate'
+      expect(input).to.equal(actual)
+    })    
   })
 })

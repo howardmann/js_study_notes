@@ -89,3 +89,22 @@ util.celsiusToFahrenheit = (celsius) => {
 util.promiseFetch = (url, request=axios) => {
   return request.get(url)
 }
+
+/**
+ * Checks if is plain object
+ * @param  {Object} obj {expects plain object}
+ * @return {Boolean}
+ */
+util.isObject = (obj) => _.isPlainObject(obj)
+
+util.getProperty = (obj, propertyName, defaultVal) => {
+  let result = propertyName.split('.').reduce((tally, index) => {
+    return tally[index] || {}
+  }, obj)
+  
+  if (util.isObject(result)) {
+    return defaultVal || undefined
+  } else {
+    return result
+  }
+}

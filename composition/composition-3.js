@@ -111,7 +111,7 @@ let DarkElf3 = function(){
   )
 }
 
-let illidan3 = new DarkElf3()
+let illidan3 = DarkElf3()
 console.log(illidan3.ears); // pointy
 console.log(illidan3.undying); // true
 console.log(illidan3.affiliation); // Dark
@@ -125,14 +125,30 @@ let HandsomeElf = function(){
     weapon: 'Charm',
     affiliation: 'Sexy Time'
   }
+  let makeChangeState = () => {
+    return {
+      changeState: (weapon) => state.weapon = weapon
+    }
+  }
   return Object.assign(state,
     makeAttack(state.weapon),
-    makeMagic(state.affiliation)
+    makeMagic(state.affiliation),
+    makeChangeState()
   )
 }
 
-let howieElf = new HandsomeElf()
+let howieElf = HandsomeElf()
 console.log(howieElf.looks); // amazing
 console.log(howieElf.weapon); // Charm
 console.log(howieElf.attack()); // Charm attack
 console.log(howieElf.magic()); // Sexy Time magic
+
+// Object.assign creates a new instance of the handsome elf. We do not need to use new
+let fakeElf = HandsomeElf()
+console.log(fakeElf.looks); // amazing
+fakeElf.changeState('banana')
+console.log(fakeElf.weapon); // banana
+
+// Proof that it's a new instance
+let newElf = HandsomeElf()
+console.log(newElf.weapon); // Charm

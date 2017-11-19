@@ -20,15 +20,9 @@ var FruitBowlAsync = {
   },
 
   init: function () {
-    // Execute async code, fetch randomFruit first, then run and return prepareFruit and then sell the fruit
-    return new Promise((resolve, reject) => {
-      this.randomFruit().then(randomFruit => {
-        return this.prepareFruit(randomFruit);
-      }).then((preparedFruit)=> {
-        this.sellFruit(preparedFruit);
-        resolve('success');
-      })
-    });
+    this.randomFruit()
+      .then(random => this.prepareFruit(random))
+      .then(prepared => this.sellFruit(prepared))
   },
 
   prepareFruit: (randomFruit) => {
@@ -42,7 +36,7 @@ var FruitBowlAsync = {
   }
 }
 
-// FruitBowlAsync.init();
+FruitBowlAsync.init();
 // Output
 // RandomFruit picked: pineapple
 // PreparedFruit: pineapple juice
